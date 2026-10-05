@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Original 云枢智维 mark: cabinet rails, central hub and operations line. -->
+    <path
+        android:fillColor="#0A2842"
+        android:pathData="M18,7 L90,7 Q101,7 101,18 L101,90 Q101,101 90,101 L18,101 Q7,101 7,90 L7,18 Q7,7 18,7 Z" />
+    <path
+        android:fillColor="#80B7D0"
+        android:pathData="M25,22 L30,22 L30,77 L25,77 Z M78,22 L83,22 L83,77 L78,77 Z" />
+    <path
+        android:fillColor="#1768C2"
+        android:pathData="M34,24 L74,24 L74,34 L34,34 Z M34,40 L74,40 L74,50 L34,50 Z M34,56 L74,56 L74,66 L34,66 Z" />
+    <path
+        android:fillColor="#DDF4F1"
+        android:pathData="M39,27 L58,27 L58,31 L39,31 Z M39,43 L58,43 L58,47 L39,47 Z M39,59 L58,59 L58,63 L39,63 Z" />
+    <path
+        android:fillColor="#0BBAA6"
+        android:pathData="M64,27 L69,27 L69,31 L64,31 Z M64,43 L69,43 L69,47 L64,47 Z M64,59 L69,59 L69,63 L64,63 Z" />
+    <path
+        android:fillColor="#DDF4F1"
+        android:pathData="M49,76 C49,71 53,68 57,68 C61,68 64,70 65,74 C69,74 72,76 72,80 C72,84 69,86 65,86 L47,86 C43,86 40,83 40,79 C40,75 44,72 49,76 Z" />
+    <path
+        android:fillColor="#0BBAA6"
+        android:pathData="M29,85 L41,85 L46,80 L54,89 L62,79 L68,83 L79,83 L79,88 L66,88 L62,85 L54,95 L46,86 L43,90 L29,90 Z" />
+</vector>

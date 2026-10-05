@@ -1,0 +1,40 @@
+# ---- Android ----
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+android/.idea/
+android/captures/
+*.iml
+*.apk
+*.aab
+
+# ---- Signing / secrets (never commit) ----
+*.jks
+*.keystore
+*.p12
+*.pass
+*.pem
+keystore.properties
+secrets.properties
+.scan-extra-patterns
+
+# ---- .NET / WPF ----
+desktop-receiver/**/bin/
+desktop-receiver/**/obj/
+desktop-receiver/release/
+.vs/
+*.user
+*.suo
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+NUL
+.idea/
+.vscode/
+
+# ---- Build outputs ----
+outputs/
+_outputs/
+dist/

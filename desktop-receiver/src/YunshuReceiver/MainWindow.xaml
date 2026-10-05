@@ -1,0 +1,205 @@
+<Window x:Class="YunshuReceiver.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="云枢智维 · 桌面接收器"
+        Width="1120" Height="760" MinWidth="900" MinHeight="620"
+        Background="{StaticResource CanvasBrush}"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="28">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="18" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Horizontal">
+                <Border Width="44" Height="44" CornerRadius="12" Background="{StaticResource NavyBrush}">
+                    <TextBlock Text="云" Foreground="White" FontSize="22" FontWeight="Bold"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <StackPanel Margin="14,0,0,0" VerticalAlignment="Center">
+                    <TextBlock Text="云枢智维" Foreground="{StaticResource NavyBrush}" FontSize="22" FontWeight="Bold" />
+                    <TextBlock Text="桌面接收器  ·  局域网文件交付" Foreground="{StaticResource MutedBrush}" FontSize="12" Margin="0,3,0,0" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Ellipse x:Name="StatusDot" Width="10" Height="10" Fill="{StaticResource SuccessBrush}" Margin="0,0,8,0" />
+                <TextBlock x:Name="StatusText" Text="接收器运行中" Foreground="{StaticResource InkBrush}" FontWeight="SemiBold" VerticalAlignment="Center" />
+                <Button x:Name="ToggleButton" Content="停止接收" Click="ToggleButton_OnClick" Margin="18,0,0,0" Padding="16,8" />
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="390" />
+                <ColumnDefinition Width="18" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Margin="0,0,8,0">
+                <Border Style="{StaticResource CardStyle}" Padding="24">
+                    <StackPanel>
+                        <TextBlock Text="连接手机" Style="{StaticResource SectionTitleStyle}" />
+                        <TextBlock Text="按下方步骤完成手机与这台电脑的安全配对。"
+                                   Foreground="{StaticResource MutedBrush}" TextWrapping="Wrap" Margin="0,6,0,16" />
+                        <Border Background="White" BorderBrush="{StaticResource LineBrush}" BorderThickness="1"
+                                CornerRadius="8" Padding="12" HorizontalAlignment="Center">
+                            <Image x:Name="QrImage" Width="250" Height="250" Stretch="Uniform" />
+                        </Border>
+                        <TextBlock x:Name="EndpointText" Text="局域网地址：准备中" Foreground="{StaticResource InkBrush}"
+                                   HorizontalAlignment="Center" Margin="0,14,0,0" />
+                        <TextBlock Text="手机连接地址" Foreground="{StaticResource MutedBrush}" FontSize="12"
+                                   HorizontalAlignment="Center" Margin="0,10,0,4" />
+                        <ComboBox x:Name="AddressSelector" Width="280" HorizontalAlignment="Center"
+                                  DisplayMemberPath="DisplayName"
+                                  SelectionChanged="AddressSelector_OnSelectionChanged" />
+                        <TextBlock x:Name="AddressHintText" Foreground="{StaticResource MutedBrush}" FontSize="11"
+                                   TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Center" MaxWidth="300"
+                                   Margin="0,5,0,0" />
+                        <Button Content="打开电脑热点设置" Click="HotspotSettingsButton_OnClick"
+                                ToolTip="打开 Windows 移动热点设置，供手机直接连接本电脑"
+                                Padding="10,5" Margin="0,8,0,0" HorizontalAlignment="Center" />
+                        <TextBlock x:Name="ExpiryText" Text="二维码有效期：--" Foreground="{StaticResource MutedBrush}"
+                                   HorizontalAlignment="Center" FontSize="12" Margin="0,5,0,0" />
+                        <WrapPanel HorizontalAlignment="Center" Margin="0,16,0,0">
+                            <Button Content="刷新二维码" Click="RefreshButton_OnClick" Padding="14,8" Margin="0,0,8,8" />
+                            <Button Content="复制连接信息" Click="CopyButton_OnClick" Padding="14,8" Margin="0,0,8,8" />
+                            <Button Content="启用局域网访问" Click="FirewallButton_OnClick" ToolTip="为当前接收器启用 Windows 局域网访问"
+                                    Padding="12,8" Margin="0,0,8,8" />
+                        </WrapPanel>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource CardStyle}" Padding="20" Margin="0,18,0,0">
+                    <StackPanel>
+                        <TextBlock Text="首次连接指引" Style="{StaticResource SectionTitleStyle}" />
+                        <TextBlock Text="首次使用请按顺序完成；热点重连或切换网络后，刷新二维码再扫描。"
+                                   Foreground="{StaticResource MutedBrush}" TextWrapping="Wrap" Margin="0,6,0,0" />
+
+                        <Grid Margin="0,16,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="26" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border Width="24" Height="24" CornerRadius="12" Background="{StaticResource NavyBrush}">
+                                <TextBlock Text="1" Foreground="White" FontSize="12" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <TextBlock Grid.Column="2" Text="关闭手机 Wi-Fi，打开手机热点；让这台电脑连接该手机热点。"
+                                       TextWrapping="Wrap" VerticalAlignment="Center" />
+                        </Grid>
+
+                        <Grid Margin="0,12,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="26" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border Width="24" Height="24" CornerRadius="12" Background="{StaticResource NavyBrush}">
+                                <TextBlock Text="2" Foreground="White" FontSize="12" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <TextBlock Grid.Column="2" Text="打开本接收器，确认显示“接收器运行中”，然后刷新二维码。"
+                                       TextWrapping="Wrap" VerticalAlignment="Center" />
+                        </Grid>
+
+                        <Grid Margin="0,12,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="26" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border Width="24" Height="24" CornerRadius="12" Background="{StaticResource NavyBrush}">
+                                <TextBlock Text="3" Foreground="White" FontSize="12" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <TextBlock Grid.Column="2" Text="打开云枢智维 App，在“设置 → 已连接电脑 → 扫码连接电脑”扫描此二维码。"
+                                       TextWrapping="Wrap" VerticalAlignment="Center" />
+                        </Grid>
+
+                        <Grid Margin="0,12,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="26" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border Width="24" Height="24" CornerRadius="12" Background="{StaticResource NavyBrush}">
+                                <TextBlock Text="4" Foreground="White" FontSize="12" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <TextBlock Grid.Column="2" Text="App 显示“连接成功”即配对完成，可以开始识别任务。"
+                                       TextWrapping="Wrap" VerticalAlignment="Center" />
+                        </Grid>
+
+                        <Grid Margin="0,12,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="26" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border Width="24" Height="24" CornerRadius="12" Background="{StaticResource NavyBrush}">
+                                <TextBlock Text="5" Foreground="White" FontSize="12" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <TextBlock Grid.Column="2" Text="识别完成后，在 App 点击“发送到电脑”；本页出现交付文件后，双击文件即可用默认 Excel 或 WPS 打开。"
+                                       TextWrapping="Wrap" VerticalAlignment="Center" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource CardStyle}" Padding="20" Margin="0,18,0,0">
+                    <StackPanel>
+                        <TextBlock Text="交付目录" Style="{StaticResource SectionTitleStyle}" />
+                        <TextBlock x:Name="OutputDirectoryText" TextWrapping="Wrap" Foreground="{StaticResource InkBrush}" Margin="0,8,0,12" />
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="选择目录" Click="SelectDirectoryButton_OnClick" Padding="14,8" />
+                            <Button Content="打开目录" Click="OpenDirectoryButton_OnClick" Padding="14,8" Margin="10,0,0,0" />
+                        </StackPanel>
+                        <TextBlock Text="文件只在局域网内传输，电脑端负责最终落盘。" Foreground="{StaticResource MutedBrush}" FontSize="12" TextWrapping="Wrap" Margin="0,14,0,0" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+            </ScrollViewer>
+
+            <StackPanel Grid.Column="2">
+                <Border Style="{StaticResource CardStyle}" Padding="22">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock Text="已连接设备" Style="{StaticResource SectionTitleStyle}" />
+                            <TextBlock x:Name="DeviceCountText" Text="0 台手机已配对" Foreground="{StaticResource MutedBrush}" Margin="0,5,0,0" />
+                            <ListBox x:Name="DeviceList" BorderThickness="0" Background="Transparent" Margin="-8,12,0,0" MinHeight="72" />
+                        </StackPanel>
+                        <Button Grid.Column="1" Content="解除全部配对" Click="RevokeButton_OnClick" Padding="13,8" VerticalAlignment="Top" />
+                    </Grid>
+                </Border>
+
+                <Border Style="{StaticResource CardStyle}" Padding="22" Margin="0,18,0,0">
+                    <StackPanel>
+                        <Grid>
+                            <TextBlock Text="最近交付" Style="{StaticResource SectionTitleStyle}" />
+                            <TextBlock Text="双击“已保存”文件，即可用本机默认 Excel/WPS 打开。" Foreground="{StaticResource MutedBrush}" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="12" />
+                        </Grid>
+                        <DataGrid x:Name="TransferGrid" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="Column"
+                                  CanUserAddRows="False" GridLinesVisibility="Horizontal" BorderThickness="0" Margin="0,14,0,0" MinHeight="250"
+                                  MouseDoubleClick="TransferGrid_OnMouseDoubleClick">
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <Setter Property="Cursor" Value="Hand" />
+                                    <Setter Property="ToolTip" Value="双击打开此 Excel 文件" />
+                                </Style>
+                            </DataGrid.RowStyle>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="接收时间" Binding="{Binding ReceivedAtUtc, StringFormat=yyyy-MM-dd HH:mm:ss}" Width="155" />
+                                <DataGridTextColumn Header="文件" Binding="{Binding FileName}" Width="*" />
+                                <DataGridTextColumn Header="来源设备" Binding="{Binding DeviceName}" Width="110" />
+                                <DataGridTextColumn Header="状态" Binding="{Binding Status}" Width="80" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
